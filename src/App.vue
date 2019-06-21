@@ -1,55 +1,66 @@
 <template>
   <div id="app">
-    <h1>Mary J, ya man were jammin!</h1>
-    <h2>Welcome to planet chill</h2>
-<!-- <img src="/src/assets/marijuana.jpg" alt="background leaf" style="float:right; width:104px; height:142px"> -->
-    <div class="">
-<nav> <router-link :to="{ name: 'weed'}">Weed Type</router-link>
+    <h1>The Howling Wolf Film Society</h1>
+    <h2>Top Picks 2019</h2>
+    <div id="app2">
+      <nav> <router-link :to="{ name: 'film'}">Film</router-link>
       | <router-link :to="{ name: 'favourite'}">Favourite</router-link>
-</nav>
+      </nav>
     </div>
-    <router-view :weeds="weeds" :favourites="favourites" id="view"></router-view>
+    <router-view :films="films" :favourites="favourites" id="view"></router-view>
   </div>
 
 </template>
 
 <script>
 import { eventBus } from '@/main.js'
-import WeedList from './components/WeedList.vue'
+import FilmList from './components/FilmList.vue'
 
 export default {
   name: 'app',
   data(){
     return {
-      weeds: [],
+      films: [],
       favourites: []
     }
   },
   mounted(){
+    // fetch("https://api.punkapi.com/v2/beers")
     fetch("https://ghibliapi.herokuapp.com/films") //films
     // fetch("http://strainapi.evanbusse.com/dxyTKu0/strains/search/all")
     .then(res => res.json())
-    .then(weeds => this.weeds = weeds)
+    .then(films => this.films = films)
 
-    eventBus.$on('weed-selected', (weed) => {
-      this.favourites.push(weed)
+    eventBus.$on('film-selected', (film) => {
+      this.favourites.push(film)
     })
   },
   components: {
-    "weed-list": WeedList
+    "film-list": FilmList
   }
 }
 </script>
 
 <style>
 #app {
-  /* background-image: url('@/mj.jpg'); */
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: left;
-  color: #2c3e50;
+  text-align: center;
+  color: black;
   margin-top: 60px;
+  /* background-image: url('./src/assets/mj2.jpg') */
+  background-color: #6564DB;
+}
+#app2 {
+  font-family: sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: black;
+  margin-top: 10px;
+  /* background-image: url('./src/assets/mj2.jpg') */
+  background-color: white;
 }
 </style>
 

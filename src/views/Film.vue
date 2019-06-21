@@ -1,17 +1,16 @@
 <template lang="html">
   <div id="">
-    <h1>Favourite</h1>
-    <film-list :films="favourites" :favourites="favourites"></film-list>
+    <film-list :films="films" :favourites="favourites"></film-list>
   </div>
-
 </template>
 
 <script>
 import FilmList from '@/components/FilmList.vue'
 export default {
-  props: ['favourites'],
+  name: 'film',
+  props: ["films", "favourites"],
   components: {
-    'film-list': FilmList
+    "film-list": FilmList
   }
 }
 </script>

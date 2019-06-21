@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="">
-    <h2>{{weed.name}}</h2>
+    <h2>{{film.title}} | Society score {{film.rt_score}}</h2>
     <button v-if="!inFavourites" v-on:click="handleButton" type="button" name="button">Add Favourite</button>
   </div>
 </template>
@@ -9,16 +9,16 @@
 import {eventBus} from '@/main.js'
 
 export default {
-  name: 'weed-list-item',
-  props: ['weed', 'favourites'],
+  name: 'film-list-item',
+  props: ['film', 'favourites'],
   computed: {
     inFavourites: function(){
-      return this.favourites.includes(this.weed)
+      return this.favourites.includes(this.film)
     }
   },
   methods: {
     handleButton: function(){
-      eventBus.$emit('weed-selected', this.weed)
+      eventBus.$emit('film-selected', this.film)
     }
   }
 }
